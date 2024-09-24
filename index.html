@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edivaldo Aventuras:O Penguin Serelepe</title>
+
+    <script src="scripts/Pad.js"></script>
+    <script src="scripts/Bola.js"></script>
+    <script src="scripts/CPU.js"></script>
+    <script src="scripts/Placar.js"></script>
+    <script src="scripts/VerifyWinner.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+
+</head>
+
+<body>
+    <center>
+        <canvas></canvas>
+        <canvas2>
+            <button onclick="bola.startGame()" class="botao">Jogar o o jogo</button>
+            <button onclick="placar.resetScore()" class="botao">Resetar Jogo</button>
+        </canvas2>
+
+
+
+    </center>
+    <script type="text/javascript">
+        canvas = document.querySelector("canvas");
+        canvas.width = 800;
+        canvas.height = 600;
+        c = canvas.getContext('2d')
+
+        let pontoJogador1 = 0;
+        let pontoJogador2 = 0;
+        let textWinner = "";
+
+        const keyboard = {
+            cima: false,
+            baixo: false,
+            direita: false,
+            esquerda: false,
+        };
+        const pad = new Pad(c, keyboard);
+        const bola = new Bola(c, pad);
+        const cpu = new CPU(c, bola);
+        const placar = new Placar(c);
+        const verifyWinner = new VerifyWinner(c, placar);
+
+        window.addEventListener('keydown', (event) => {
+            if (event.keyCode == 65) {//esquerda
+                keyboard.esquerda = true;
+            }
+
+            if (event.keyCode == 68) {//direita
+                keyboard.direita = true;
+            }
+            if (event.keyCode == 87) {//cima
+                keyboard.cima = true;
+            }
+            if (event.keyCode == 83) { keyboard.baixo = true }
+        })
+
+        window.addEventListener('keyup', (event) => {
+            if (event.keyCode == 65) {//esquerda
+                keyboard.esquerda = false;
+            }
+
+            if (event.keyCode == 68) {//direita
+                keyboard.direita = false;
+            }
+            if (event.keyCode == 87) {//cima
+                keyboard.cima = false;
+            }
+            if (event.keyCode == 83) { keyboard.baixo = false }
+        })
+
+        function game() {
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            pad.draw();
+            bola.draw();
+            cpu.draw();
+            placar.draw();
+            verifyWinner.draw();
+            requestAnimationFrame(game)
+        }
+        requestAnimationFrame(game)
+
+    </script>
+
+
+</body>
+
+</html>

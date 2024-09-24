@@ -1,0 +1,19 @@
+canvas {border: 1px solid black;
+        background-image:url(BackGrounds/campo.jpg);
+        background-size: 800px 600px;
+        position: relative;
+        
+        }
+
+body {background-image: url(BackGrounds/R.jfif);
+      background-repeat: no-repeat;
+      background-size: 1600px 1300px;
+      background-position: 0px -225px;
+       }
+
+canvas2 {position: absolute;
+         top: 760px;
+         right: 690px;
+        
+}
+
